@@ -8,4 +8,4 @@ There are sample configurations for Nginx and PHP within this project. The Nginx
 
 Testing
 -------
-This project is based on the Phalcon tutorial and only contains two controllers ```/Index``` and ```/Test```.
+This project is based on the Phalcon tutorial and only contains two controllers ```/Index``` and ```/Test```, but it's enough to test your buildpack installation.
