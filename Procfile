@@ -1,0 +1,1 @@
+web: sh /app/bin/boot.sh
