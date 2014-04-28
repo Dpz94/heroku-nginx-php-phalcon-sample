@@ -2,53 +2,53 @@ server {
   	server_name		localhost;
   	listen			<%= ENV['PORT'] %>;
 	add_header		X-Frame-Options SAMEORIGIN; # prevent clickjacking
-	charset      	utf-8;
+	charset      		utf-8;
 	try_files 		$uri $uri/ @rewrite;
 	
 	# deny hidden files
   	location ~ /\. {
-    	deny            all;
-    	access_log      off;
-    	log_not_found	off;
+    		deny            all;
+    		access_log      off;
+    		log_not_found	off;
   	}
 	
 	# allow favicon
   	location = /favicon.ico {
 		allow           all;
-    	access_log      off;
-    	log_not_found	off;
+    		access_log      off;
+    		log_not_found	off;
   	}
 
 	# allow robots
   	location = /robots.txt {
-    	allow           all;
-    	access_log      off;
-    	log_not_found	off;
+    		allow           all;
+    		access_log      off;
+    		log_not_found	off;
   	}
 
 	# php status
   	location = /status {
-		allow 			127.0.0.1;
-		deny			all;
-    	include         /app/vendor/nginx/conf/fastcgi_params;
-    	fastcgi_pass    unix:/tmp/php-fpm.socket;
-    	fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		allow 		127.0.0.1;
+		deny		all;
+    		include         /app/vendor/nginx/conf/fastcgi_params;
+    		fastcgi_pass    unix:/tmp/php-fpm.socket;
+    		fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
   	}
 
 	# nginx status
 	location = /nginx_status {
-		allow 			127.0.0.1;
-		deny			all;
+		allow 		127.0.0.1;
+		deny		all;
 	  	stub_status 	on;
 	  	access_log   	off;
 	}
 
 	# ping pong
   	location = /ping {
-		allow			all;
-    	include         /app/vendor/nginx/conf/fastcgi_params;
-    	fastcgi_pass    unix:/tmp/php-fpm.socket;
-    	fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		allow		all;
+    		include         /app/vendor/nginx/conf/fastcgi_params;
+    		fastcgi_pass    unix:/tmp/php-fpm.socket;
+    		fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
   	}
 
 	# default redirect
@@ -58,10 +58,10 @@ server {
 
 	# default redirect
 	location ~ \.php {
-		fastcgi_index  					/index.php;
-		fastcgi_pass    				unix:/tmp/php-fpm.socket;
+		fastcgi_index  			/index.php;
+		fastcgi_pass    		unix:/tmp/php-fpm.socket;
 
-		include         				/app/vendor/nginx/conf/fastcgi_params;
+		include         		/app/vendor/nginx/conf/fastcgi_params;
 		fastcgi_split_path_info       	^(.+\.php)(/.+)$;
 		fastcgi_param PATH_INFO       	$fastcgi_path_info;
 		fastcgi_param PATH_TRANSLATED 	$document_root$fastcgi_path_info;
